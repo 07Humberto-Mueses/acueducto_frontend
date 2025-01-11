@@ -6,7 +6,7 @@ import AcueductoLogo from '../imagenes/LogoAcueducto.png';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [rol, setRol] = useState('1'); 
+  const [rol, setRol] = useState('ROL001');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -67,36 +67,46 @@ const LoginPage = () => {
       <div className="loginContainer">
         <h2 className="loginTitle">Iniciar Sesión</h2>
         <form className="loginForm" onSubmit={handleLogin}>
-          <div className={`inputGroup ${error ? 'error' : ''}`}>
+          <div className="coolinput">
+            <label htmlFor="username" className="text">Usuario:</label>
             <input
+              id="username"
               type="text"
+              placeholder="Escribe aquí..."
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
               autoComplete="username"
+              className="input"
             />
-            <label>Usuario</label>
           </div>
-          <div className={`inputGroup ${error ? 'error' : ''}`}>
+
+          <div className="coolinput">
+            <label htmlFor="password" className="text">Contraseña:</label>
             <input
+              id="password"
               type="password"
+              placeholder="Escribe aquí..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
+              className="input"
             />
-            <label>Contraseña</label>
           </div>
-          <div className="inputGroup">
+
+          <div className="coolinput">
+            <label htmlFor="role" className="text">Rol:</label>
             <select
-              className="styledSelect"
+              id="role"
               value={rol}
               onChange={(e) => setRol(e.target.value)}
               required
+              className="input"
             >
-              <option value="1">Administrador</option>
-              <option value="3">Auxiliar</option>
-              <option value="2">Contador</option>
+              <option value="ROL001">Administrador</option>
+              <option value="ROL002">Contador</option>
+              <option value="ROL003">Secretario</option>
             </select>
           </div>
           <button type="submit" className="loginButton">
@@ -104,11 +114,10 @@ const LoginPage = () => {
           </button>
           {error && <p className="error-message">{error}</p>}
         </form>
+
       </div>
     </div>
   );
 };
 
 export default LoginPage;
-
-

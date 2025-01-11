@@ -14,6 +14,10 @@ import {
   Plus,
   TreasureChest,
   Minus,
+  Gear,
+  UserPlus,
+  Password,
+  List,
 } from "@phosphor-icons/react";
 import AcueductoLogo from "../imagenes/LogoAcueducto.png";
 
@@ -40,8 +44,8 @@ const Sidebar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
   };
 
   return (
@@ -57,7 +61,7 @@ const Sidebar = () => {
           </div>
 
           <ul>
-            {userRole === "1" && (
+            {userRole === "ROL001" && (
               <>
                 <li className={activeItems.includes(1) ? "active" : ""}>
                   <Link to="#" onClick={() => handleItemClick(1)}>
@@ -129,10 +133,39 @@ const Sidebar = () => {
                     </li>
                   </ul>
                 </li>
+                <li className={activeItems.includes(3) ? "active" : ""}>
+                  <Link to="#" onClick={() => handleItemClick(3)}>
+                    <Gear className="iconSidebar" />
+                    <span className="text">Configuración</span>
+                    <CaretDown
+                      className={`arrow ${activeItems.includes(3) ? "active" : ""}`}
+                    />
+                  </Link>
+                  <ul className={`submenu ${activeItems.includes(3) ? "open" : ""}`}>
+                    <li>
+                      <Link to="/app/crear_usuario" onClick={() => setActiveItems([])}>
+                        <UserPlus className="iconSidebar" />
+                        <span className="text">Crear Usuario</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/app/cambiar_contraseña" onClick={() => setActiveItems([])}>
+                        <Password className="iconSidebar" />
+                        <span className="text">Cambiar Contraseña</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/app/listar_usuarios" onClick={() => setActiveItems([])}>
+                        <List  className="iconSidebar" />
+                        <span className="text">Listar Usuarios</span>
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
               </>
             )}
 
-            {userRole === "2" && (
+            {userRole === "ROL002" && (
               <li className={activeItems.includes(2) ? "active" : ""}>
                 <Link to="#" onClick={() => handleItemClick(2)}>
                   <Calculator className="iconSidebar" />
@@ -164,7 +197,7 @@ const Sidebar = () => {
               </li>
             )}
 
-            {userRole === "3" && (
+            {userRole === "ROL003" && (
               <li className={activeItems.includes(1) ? "active" : ""}>
                 <Link to="#" onClick={() => handleItemClick(1)}>
                   <Invoice className="iconSidebar" />
@@ -224,3 +257,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
