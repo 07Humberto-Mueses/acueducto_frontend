@@ -30,20 +30,20 @@ const CreateUser = () => {
                 mode: "cors", 
                 credentials: "include",
                 body: JSON.stringify({
-                    id_estado_empleado: "1", // Asegúrate de que este valor existe en la tabla estado_empleados
+                    id_estado_empleado: "1",
                     ...formData,
                 }),
             });
 
             const data = await response.json();
             if (response.ok) {
-                alert("Usuario creado exitosamente");
+                notify("Usuario creado exitosamente");
                 setFormData({ nombre: "", nombre_usuario: "", password: "", id_rol: "ROL001" });
             } else {
-                alert(data.message || "Error al crear el usuario");
+                notify(data.message || "Error al crear el usuario");
             }
         } catch (error) {
-            alert("Error de conexión con el servidor");
+            notify("Error de conexión con el servidor");
             console.error("Error:", error);
         }
     };
