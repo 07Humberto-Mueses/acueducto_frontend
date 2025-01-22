@@ -6,7 +6,7 @@ import AcueductoLogo from '../imagenes/LogoAcueducto.png';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [rol, setRol] = useState('ROL001');
+  const [rol, setRol] = useState('ROL0001');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const LoginPage = () => {
       const formData = new FormData();
       formData.append('email', username);
       formData.append('password', password);
-      const response = await fetch('http://localhost:9090/verify_role', {
+      const response = await fetch('http://localhost:9090/auth/verify_role', {
         method: 'POST',
         body: formData,
         credentials: 'include',
@@ -35,7 +35,7 @@ const LoginPage = () => {
           return;
         }
         formData.append('rol', rol);
-        const loginResponse = await fetch('http://localhost:9090/login', {
+        const loginResponse = await fetch('http://localhost:9090/auth/login', {
           method: 'POST',
           body: formData,
           credentials: 'include',
@@ -104,9 +104,9 @@ const LoginPage = () => {
               required
               className="input"
             >
-              <option value="ROL001">Administrador</option>
-              <option value="ROL002">Contador</option>
-              <option value="ROL003">Secretario</option>
+              <option value="ROL0001">Administrador</option>
+              <option value="ROL0002">Contador</option>
+              <option value="ROL0003">Secretario</option>
             </select>
           </div>
           <button type="submit" className="loginButton">

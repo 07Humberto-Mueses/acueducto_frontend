@@ -1,15 +1,25 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateUser = () => {
     const [formData, setFormData] = useState({
         nombre: "",
         nombre_usuario: "",
         password: "",
-        id_rol: "ROL001",
+        id_rol: "ROL0001",
         id_estado_empleado: "ESTA001",
     });
 
     const [message, setMessage] = useState("");
+
+    const notify = (message, type) => {
+        if (type === "success") {
+            toast.success(message);
+        } else {
+            toast.error(message);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +32,7 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:9090/register", {
+            const response = await fetch("http://localhost:9090/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -38,7 +48,7 @@ const CreateUser = () => {
             const data = await response.json();
             if (response.ok) {
                 notify("Usuario creado exitosamente");
-                setFormData({ nombre: "", nombre_usuario: "", password: "", id_rol: "ROL001" });
+                setFormData({ nombre: "", nombre_usuario: "", password: "", id_rol: "ROL0001" });
             } else {
                 notify(data.message || "Error al crear el usuario");
             }
